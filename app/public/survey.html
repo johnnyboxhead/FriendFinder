@@ -126,7 +126,13 @@
 <!-- <script type="text/javascript" src="../data/friends.js"></script>     -->
 <script>
 var friends = [];
-
+var compatibilityDifference = [];
+var difference = [];
+var friendsLength;
+var compatibility = 0;
+var bestScore;
+var bestScoreIndex;
+var bestMatch;
 
 $(document).ready(function(){
     console.log("Ready!");
@@ -135,7 +141,7 @@ $(document).ready(function(){
 
 
 $("#submit").on("click", function(){
-    console.log("It works!");
+    console.log("Start");
     var friend = {
         name: $("#name").val(),
         photo: $("#photo").val(),
@@ -153,8 +159,41 @@ $("#submit").on("click", function(){
         ]
     }
     friends.push(friend)
+    friendsLength = friends.length
+    console.log("You have "+friendsLength+" friends")
+    console.log("Friends are: ")
     console.log(friends)
-})
+
+    for(j=0; j<(friendsLength - 1); j++){
+        console.log("testj" + j)
+        for(i=0; i<10; i++){
+            compatibility = parseInt(compatibility) + (parseInt(friends[friendsLength - 1].scores[i]) - parseInt(friends[j].scores[i]))
+            console.log(compatibility)
+        }
+        if (compatibility < 0){
+            compatibility = 0 - compatibility
+        }
+        // bestMatch = compatibilityDifference[compatibilityDifference.indexOf(bestScore)].name
+        // console.log(bestMatch)
+        compatibilityDifference.push(parseInt(compatibility));
+        compatibility = 0
+    }
+
+    if (friends.length <= 2){
+        bestMatch = friends[0].name
+    }else{
+    console.log("Compatibility score is: " + compatibilityDifference);
+    bestScore = Math.min.apply(Math, compatibilityDifference);
+    console.log("Best score is: " + bestScore);
+    console.log("Index of best score: " + compatibilityDifference.indexOf(parseInt(bestScore)));
+    bestScoreIndex = compatibilityDifference.indexOf(parseInt(bestScore))
+    console.log("Best Score Index is: " + bestScoreIndex);
+    bestMatch = friends[bestScoreIndex].name;
+    }
+    console.log("Best match is: " + bestMatch);
+    compatibilityDifference.length = 0;
+    console.log("End");
+    })
 </script>
 </body>
 </html>
