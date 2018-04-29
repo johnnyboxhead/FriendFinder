@@ -10,6 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="bestMatch"></p>
+        </div>
+    </div>
     <div class="container">
         <h2>Survey Questions</h2>
         <hr>
@@ -125,6 +131,15 @@
             </div>
 <!-- <script type="text/javascript" src="../data/friends.js"></script>     -->
 <script>
+$(document).ready(function(){
+    console.log("Ready!");
+})
+
+// var express = require("express");
+// var bodyParser = require("body-parser");
+// var path = require("path");
+// var app = express();    
+
 var friends = [];
 var compatibilityDifference = [];
 var difference = [];
@@ -134,9 +149,6 @@ var bestScore;
 var bestScoreIndex;
 var bestMatch;
 
-$(document).ready(function(){
-    console.log("Ready!");
-})
 
 
 
@@ -189,11 +201,21 @@ $("#submit").on("click", function(){
     bestScoreIndex = compatibilityDifference.indexOf(parseInt(bestScore))
     console.log("Best Score Index is: " + bestScoreIndex);
     bestMatch = friends[bestScoreIndex].name;
+    bestMatchPhoto = friends[bestScoreIndex].photo;
     }
     console.log("Best match is: " + bestMatch);
+    $("#myModal").style.display = "block"
+    $("#myModal").on("click", function() {
+        $("#myModal").style.display = "none";
+    })
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            $("#myModal").style.display = "none";
+        }
+    }
     compatibilityDifference.length = 0;
     console.log("End");
-    })
+})
 </script>
 </body>
 </html>

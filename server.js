@@ -8,8 +8,8 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-require(".app/routing/apiRoutes.js")(app);
-require(".app/routing/htmlRoutes.js")(app);
+// require("./app/routing/apiRoutes.js")(app);
+require("./app/routing/htmlRoutes.js")(app);
 
 // app.get("/api/friends", function(req, res){
 //     res.send("Hello World")
